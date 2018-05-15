@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.valentim.cursomvc.domain.Categoria;
 import com.valentim.cursomvc.repositories.CategoriaRepository;
+import com.valentim.cursomvc.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {
@@ -15,6 +16,10 @@ public class CategoriaService {
 	
 	public Categoria buscar(Integer id) {
 	 Categoria obj = repo.findOne(id);// vai no bd, busca uma categoria 
+	 if(obj==null) {
+		 throw new ObjectNotFoundException("Objeto Não encontrado: " +id + ",Tipo: " + Categoria.class.getName());
+		 
+	 }
 	 return obj;
 		
 		
