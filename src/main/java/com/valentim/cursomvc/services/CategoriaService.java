@@ -1,5 +1,7 @@
 package com.valentim.cursomvc.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -33,7 +35,7 @@ public class CategoriaService {
 	}
 
 	public Categoria update(Categoria obj) {
-		find(obj.getId());//chama o metodo acima 
+		find(obj.getId());// chama o metodo acima
 		return repo.save(obj);
 	}
 
@@ -41,9 +43,14 @@ public class CategoriaService {
 		find(id);
 		try {
 			repo.delete(id);
-		}catch(DataIntegrityViolationException e){
-			throw new  DataIntegrityException("Não é possivel Excluir uma categoria que possui produtos");
+		} catch (DataIntegrityViolationException e) {
+			throw new DataIntegrityException("Não é possivel Excluir uma categoria que possui produtos");
 		}
-		
+
 	}
+
+	public List<Categoria> findAll() {
+		return repo.findAll();
+
 	}
+}
