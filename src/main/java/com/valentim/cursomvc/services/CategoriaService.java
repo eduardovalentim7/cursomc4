@@ -9,26 +9,29 @@ import com.valentim.cursomvc.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {
-	
-	//declara a dependencia de um objeto tipo categoriarepository
-	@Autowired //instancia automatimente
+
+	// declara a dependencia de um objeto tipo categoriarepository
+	@Autowired // instancia automatimente
 	private CategoriaRepository repo;
-	
-	public Categoria buscar(Integer id) {
-	 Categoria obj = repo.findOne(id);// vai no bd, busca uma categoria 
-	 if(obj==null) {
-		 throw new ObjectNotFoundException("Objeto Não encontrado: " +id + ",Tipo: " + Categoria.class.getName());
-		 
-	 }
-	 return obj;
-		
-		
+
+	public Categoria find(Integer id) {
+		Categoria obj = repo.findOne(id);// vai no bd, busca uma categoria
+		if (obj == null) {
+			throw new ObjectNotFoundException("Objeto Não encontrado: " + id + ",Tipo: " + Categoria.class.getName());
+
+		}
+		return obj;
+
 	}
-	
+
 	public Categoria insert(Categoria obj) {
 		obj.setId(null);
 		return repo.save(obj);
-		
+
 	}
 
+	public Categoria update(Categoria obj) {
+		find(obj.getId());//chama o metodo acima 
+		return repo.save(obj);
+	}
 }

@@ -14,7 +14,7 @@ public class ClienteService {
 	@Autowired //instancia automatimente
 	private ClienteRepository repo;
 	
-	public Cliente buscar(Integer id) {
+	public Cliente find(Integer id) {
 	 Cliente obj = repo.findOne(id);// vai no bd, busca uma categoria 
 	 if(obj==null) {
 		 throw new ObjectNotFoundException("Objeto Não encontrado: " +id + ",Tipo: " + Cliente.class.getName());
